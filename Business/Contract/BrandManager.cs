@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Ultilities.Results;
 using DataAccess.Abstract;
 using Entities.Contract;
 using System;
@@ -14,29 +16,44 @@ namespace Business.Contract
         {
             _brandDal = brandDal;
         }
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
+
+            if (brand.BrandName.Length < 2)
+            {
+                return new ErrorResult(Messages.NameInvalide);
+            }
+
             _brandDal.Add(brand);
+
+            return new SuccessResult(Messages.AddedMessages);
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
+            return new SuccessResult(Messages.DeletedMessages);
         }
 
-        public Brand Get(int id)
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.Get(b => b.BrandId == id);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<Brand>>(_brandDal.GetAll(), Messages.MaintenanceTime);
+            }
+
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<Brand> GetById(int id)
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == id));
         }
 
-        public void Update(Brand brand)
+        public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
+            return new SuccessResult(Messages.UpdatedMessages);
         }
     }
 }
