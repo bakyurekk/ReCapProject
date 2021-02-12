@@ -20,7 +20,7 @@ namespace Business.Contract
         {
             if (rental.ReturnDate == null)
             {
-                return new ErrorResult(Messages.NameInvalide);
+                return new ErrorResult(Messages.RentalAddedEroor);
             }
 
             _rentalDal.Add(rental);

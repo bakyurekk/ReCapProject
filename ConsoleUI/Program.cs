@@ -28,7 +28,13 @@ namespace ConsoleUI
         private static void RentalTest()
         {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            Console.WriteLine(rentalManager.Add(new Rental {CarId = 1, CustomerId = 1, RentDate = new DateTime(2021, 04, 02) }).Message);
+
+
+            var AddedRentalCar = rentalManager.Add(new Rental { CarId = 1, CustomerId = 1, RentDate = new DateTime(2021, 04, 02) });
+            Console.WriteLine(AddedRentalCar.Message);
+
+            
+
         }   
 
         private static void CustomerTest()
