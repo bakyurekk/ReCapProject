@@ -13,14 +13,41 @@ namespace ConsoleUI
         {
 
 
-            CarTest();
+            //CarTest();
 
             //ColorTest();
 
             //BrandTest();
 
+            //CustomerTest();
 
+            RentalTest();
 
+        }
+
+        private static void RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Console.WriteLine(rentalManager.Add(new Rental {CarId = 1, CustomerId = 1, RentDate = new DateTime(2021, 04, 02) }).Message);
+        }   
+
+        private static void CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //********Added * *******
+            var addedCustomer = customerManager.Add(new Customer { UserId = 3, CompanyName = "Serkan A.Ş"});
+            if (addedCustomer.Success == true)
+            {
+
+                foreach (var customer in customerManager.GetAll().Data)
+                {
+                    Console.WriteLine($"Müşteri İsmi :{customer.CompanyName}");
+                }
+            }
+            else
+            {
+                Console.WriteLine(addedCustomer.Message);
+            }
         }
 
         private static void CarTest()
@@ -31,41 +58,39 @@ namespace ConsoleUI
             // ******** GetById ********
             //Console.WriteLine(carManager.Get(1).CarName);
 
+            //********Added ********
+            var addedCar = carManager.Add(new Car { CarName = "E200", BrandId = 2, ColorId = 2, ModelYear = 2018, DailyPrice = 3500, Description = "Mercedes E200 4Matic" });
+            if (addedCar.Success == true)
+            {
 
-
-            // ******** Added ********
-            //var addedCar = carManager.Add(new Car { CarName = "E200", BrandId = 2, ColorId = 2, ModelYear = 2018, DailyPrice = 3500, Description = "Mercedes E200 4Matic" });
-            //if (addedCar.Success == true)
-            //{
-
-            //    foreach (var car in carManager.GetAll())
-            //    {
-            //        Console.WriteLine($"Araba ID :{car.CarId} Araba Adı :{car.CarName} Model ID :{ car.BrandId} Renk ID :{car.ColorId} Model Yılı: {car.ModelYear} Günlük Fiyat :{car.DailyPrice} Açıklama :{ car.Description}");
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine(addedCar.Message);
-            //}
+                foreach (var car in carManager.GetAll().Data)
+                {
+                    Console.WriteLine($"Araba ID :{car.CarId} Araba Adı :{car.CarName} Model ID :{ car.BrandId} Renk ID :{car.ColorId} Model Yılı: {car.ModelYear} Günlük Fiyat :{car.DailyPrice} Açıklama :{ car.Description}");
+                }
+            }
+            else
+            {
+                Console.WriteLine(addedCar.Message);
+            }
 
 
             //********Deleted * *******
-            //var deletedCar = carManager.GetById(10);
-            //carManager.Delete(deletedCar);
+            var deletedCar = carManager.GetById(10).Data;
+            carManager.Delete(deletedCar);
 
 
             // ******** Updated ********
-            //var updatedCar = carManager.Get(3);
-            //updatedCar.Description = "Alfa Romeo 2020";
-            //carManager.Update(updatedCar);
+            var updatedCar = carManager.GetById(3).Data;
+            updatedCar.Description = "Alfa Romeo 2020";
+            carManager.Update(updatedCar);
 
 
 
             // Tüm Arabaların Listesi
-            //foreach (var car in carManager.GetAll())
-            //{
-            //    Console.WriteLine($"Araba ID :{car.CarId} Araba Adı :{car.CarName} Model ID :{ car.BrandId} Renk ID :{car.ColorId} Model Yılı: {car.ModelYear} Günlük Fiyat :{car.DailyPrice} Açıklama :{ car.Description}");
-            //}
+            foreach (var car in carManager.GetAll().Data)
+            {
+                Console.WriteLine($"Araba ID :{car.CarId} Araba Adı :{car.CarName} Model ID :{ car.BrandId} Renk ID :{car.ColorId} Model Yılı: {car.ModelYear} Günlük Fiyat :{car.DailyPrice} Açıklama :{ car.Description}");
+            }
 
             var result = carManager.GetCarDetails();
             if (result.Success == true)
@@ -90,28 +115,10 @@ namespace ConsoleUI
             ColorManager colorManager = new ColorManager(new EfColorDal());
             Console.WriteLine(" <<< **************************** <<< RENK LİSTESİ >>> **************************** >>> \n");
 
-            // ******** GetById ********
-            //Console.WriteLine(colorManager.Get(1).BrandName);
-
-
-            // ******** Added ********
-            //colorManager.Add(new Brand {ColorName="------"});
-
-            // ******** Deleted ********
-            //var deletedColor = colorManager.Get(7);
-            // colorManager.Delete(deletedColor);
-
-            // ******** Updated ********
-            //var updatedColor = colorManager.Get(3);
-            //updatedColor.ColorName = "------";
-            //colorManager.Update(updatedColor);
-
-            // ******** All Color List ********
-
-            //foreach (var color in colorManager.GetAll())
-            //{
-            //    Console.WriteLine("Renk ID :{0} Renk Adı :{1} ", color.ColorId, color.ColorName);
-            //}
+            foreach (var color in colorManager.GetAll().Data)
+            {
+                Console.WriteLine("Renk ID :{0} Renk Adı :{1} ", color.ColorId, color.ColorName);
+            }
         }
 
         private static void BrandTest()
@@ -119,34 +126,11 @@ namespace ConsoleUI
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             Console.WriteLine(" <<< **************************** <<< MARKA LİSTESİ >>> **************************** >>> \n");
 
-            // ******** GetById ********
-            //Console.WriteLine(brandManager.Get(1).BrandName);
-
-
-
-            // ******** Added ********
-            //brandManager.Add(new Brand {BrandName="------"});
-
-
-
-            // ******** Deleted ********
-            //var deletedBrand = brandManager.Get(7);
-            // brandManager.Delete(deletedBrand);
-
-
-
-            // ******** Updated ********
-            //var updatedBrand = brandManager.Get(3);
-            //updatedBrand.BrandName = "-----";
-            //brandManager.Update(updatedBrand);
-
-
-
             // ******** All Brand List ********
-            //foreach (var brand in brandManager.GetAll())
-            //{
-            //    Console.WriteLine("Marka ID :{0} Marka Adı :{1} ", brand.BrandId, brand.BrandName);
-            //}
+            foreach (var brand in brandManager.GetAll().Data)
+            {
+                Console.WriteLine("Marka ID :{0} Marka Adı :{1} ", brand.BrandId, brand.BrandName);
+            }
 
         }
 
