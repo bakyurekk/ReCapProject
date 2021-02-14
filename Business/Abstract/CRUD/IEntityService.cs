@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Business.Abstract
+namespace Business.Abstract.CRUD
 {
-    public interface IEntityService<T>
+    public interface ICrudService<T>
     {
         IDataResult<List<T>> GetAll();
         IDataResult<T> GetById(int id);

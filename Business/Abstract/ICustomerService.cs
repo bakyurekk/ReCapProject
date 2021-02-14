@@ -1,11 +1,19 @@
-﻿using Entities.Contract;
+﻿using Core.Ultilities.Results;
+using Entities.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Business.Abstract
 {
-    public interface ICustomerService:IEntityService<Customer>
+    public interface ICustomerService
     {
+        IDataResult<List<Customer>> GetAll();
+        IDataResult<Customer> GetById(int id);
+        IResult Add(Customer customer);
+
+        IResult Delete(Customer customer);
+
+        IResult Update(Customer customer);
     }
 }
