@@ -90,10 +90,11 @@ namespace WebAPI.Controllers
         {
             var result = _carService.Add(car);
 
-            if (result.Success && car.CarName.Length > 2 )
+            if (result.Success == true && car.CarName.Length > 2)
             {
                 return Ok(result);
             }
+            
             return BadRequest(result);
         }
 

@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
         public IActionResult Add(Rental rental)
         {
             var result = _rentalService.Add(rental);
-            if (result.Success)
+            if (result.Success && rental.ReturnDate.Value != null)
             {
                 return Ok(result);
             }

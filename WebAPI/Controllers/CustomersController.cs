@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         public IActionResult Add(Customer customer)
         {
             var result = _customerService.Add(customer);
-            if (result.Success)
+            if (result.Success && customer.CompanyName.Length > 2)
             {
                 return Ok(result);
             }

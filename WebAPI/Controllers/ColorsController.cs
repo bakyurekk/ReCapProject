@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         public IActionResult Add(Color color)
         {
             var result = _colorService.Add(color);
-            if (result.Success)
+            if (result.Success && color.ColorName.Length > 2)
             {
                 return Ok(result);
             }
