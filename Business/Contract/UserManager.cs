@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofact.Validation;
 using Core.Ultilities.Results;
 using DataAccess.Abstract;
 using Entities.Contract;
@@ -16,6 +18,8 @@ namespace Business.Contract
         {
             _userDal = userDal;
         }
+
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
             _userDal.Add(user);

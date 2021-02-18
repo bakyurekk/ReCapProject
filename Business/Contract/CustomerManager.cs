@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofact.Validation;
 using Core.Ultilities.Results;
 using DataAccess.Abstract;
 using Entities.Contract;
@@ -17,6 +19,8 @@ namespace Business.Contract
             _customerDal = customerDal;
         }
 
+
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
             if (customer.CompanyName.Length < 2)
