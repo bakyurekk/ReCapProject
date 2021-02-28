@@ -14,5 +14,6 @@ namespace Business.Constants
         public static string MaintenanceTime = "Sistem Bakımda";
         public static string RentalAddedEroor = "Eklemek İstediğini Araç Kiradan Dönmemiştir.";
         public static string CarDetail = "Araç Detayları";
+        public static string CarImageLimitExceded = "5 Resimden fazla ekleyemezsiniz.";
     }
 }

@@ -14,6 +14,6 @@ namespace Entities.Contract
 
         public string Email { get; set; }
 
-        public int Password { get; set; }
+        public byte[] Password { get; set; }
     }
 }
