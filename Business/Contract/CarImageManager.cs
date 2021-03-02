@@ -24,7 +24,7 @@ namespace Business.Contract
             _carImageDal = carImageDal;
         }
 
-        //[ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file,CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage.CarId));
@@ -39,6 +39,7 @@ namespace Business.Contract
             return new SuccessResult();
         }
 
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
         {
             IResult result = BusinessRules.Run(
@@ -51,6 +52,16 @@ namespace Business.Contract
             }
 
             _carImageDal.Delete(carImage);
+            return new SuccessResult();
+
+        }
+
+        [ValidationAspect(typeof(CarImageValidator))]
+        public IResult Update(IFormFile file, CarImage carImage)
+        {
+            carImage.ImagePath = FileHelper.UpdateAsync(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
+            carImage.Date = DateTime.Now;
+            _carImageDal.Update(carImage);
             return new SuccessResult();
         }
 
@@ -80,16 +91,8 @@ namespace Business.Contract
             return new SuccessDataResult<List<CarImage>>(CheckIfCarImageNull(id));
         }
 
-        public IResult Update(IFormFile file,CarImage carImage)
-        {
-            carImage.ImagePath = FileHelper.UpdateAsync(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
-            carImage.Date = DateTime.Now;
-            _carImageDal.Update(carImage);
-            return new SuccessResult();
-        }
 
-
-
+        // -- Bussines Rules Code -- 
         private IResult CheckIfCarImageLimitedExceded(int id)
         {
             var result = _carImageDal.GetAll(ci => ci.CarId == id).Count();

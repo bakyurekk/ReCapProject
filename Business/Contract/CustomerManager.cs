@@ -33,6 +33,7 @@ namespace Business.Contract
             return new SuccessResult(Messages.AddedMessages);
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer customer)
         {
             _customerDal.Delete(customer);
@@ -54,6 +55,7 @@ namespace Business.Contract
             return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == id));
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);

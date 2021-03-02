@@ -26,6 +26,7 @@ namespace Business.Contract
             return new SuccessResult(Messages.AddedMessages);
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
@@ -48,6 +49,7 @@ namespace Business.Contract
             return new SuccessDataResult<Color>( _colorDal.Get(color => color.ColorId == id));
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);

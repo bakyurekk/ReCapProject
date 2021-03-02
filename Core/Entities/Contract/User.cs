@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.Contract
+namespace Core.Entities.Contract
 {
     public class User:IEntity
     {
@@ -14,6 +14,10 @@ namespace Entities.Contract
 
         public string Email { get; set; }
 
-        public byte[] Password { get; set; }
+        public byte[] PasswordHash { get; set; }
+
+        public byte[] PasswordSalt { get; set; }
+
+        public bool Status { get; set; }
     }
 }

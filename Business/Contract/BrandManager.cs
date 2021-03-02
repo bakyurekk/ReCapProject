@@ -34,6 +34,7 @@ namespace Business.Contract
             return new SuccessResult(Messages.AddedMessages);
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
@@ -55,6 +56,7 @@ namespace Business.Contract
             return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == id));
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
