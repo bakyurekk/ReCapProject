@@ -1,8 +1,8 @@
 ﻿using Business.Abstract;
-using Business.Contract;
-using DataAccess.Contract.EntityFramework;
-using DataAccess.Contract.InMemory;
-using Entities.Contract;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
+using DataAccess.Concrete.InMemory;
+using Entities.Concrete;
 using System;
 
 namespace ConsoleUI

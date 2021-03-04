@@ -1,12 +1,12 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
-using Business.Contract;
+using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Ultilities.Security.JWT;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
-using DataAccess.Contract.EntityFramework;
+using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -41,8 +41,6 @@ namespace Business.DependencyResolver.Autofac
 
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
-
-            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

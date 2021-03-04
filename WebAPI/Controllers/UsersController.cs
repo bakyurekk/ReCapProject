@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
-using Core.Entities.Contract;
-using Entities.Contract;
+using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

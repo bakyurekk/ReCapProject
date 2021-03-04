@@ -1,5 +1,5 @@
-﻿using Core.Entities.Contract;
-using Entities.Contract;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

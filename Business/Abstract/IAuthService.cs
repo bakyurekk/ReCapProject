@@ -1,4 +1,4 @@
-﻿using Core.Entities.Contract;
+﻿using Core.Entities.Concrete;
 using Core.Ultilities.Results;
 using Core.Ultilities.Security.JWT;
 using Entities.DTOs;
