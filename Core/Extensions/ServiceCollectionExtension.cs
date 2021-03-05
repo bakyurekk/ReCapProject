@@ -1,4 +1,4 @@
-﻿using Core.IoC;
+﻿using Core.Ultilities.IoC;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

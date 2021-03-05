@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Caching;
 using Core.Aspects.Autofact.Validation;
 using Core.Entities.Concrete;
 using Core.Ultilities.Results;
@@ -19,13 +21,16 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
+        [SecuredOperation("user.curd,admin")]
         [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.Get")]
         public IResult Add(User user)
         {
             _userDal.Add(user);
             return new SuccessResult(Messages.AddedMessages);
         }
 
+        [SecuredOperation("user.curd,admin")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Delete(User user)
         {
@@ -33,12 +38,15 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedMessages);
         }
 
+        [SecuredOperation("user.curd,admin")]
         [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.Get")]
         public IResult Update(User user)
         {
             _userDal.Update(user);
             return new SuccessResult(Messages.UpdatedMessages);
         }
+
 
         public IDataResult<List<User>> GetAll()
         {

@@ -2,7 +2,7 @@ using Business.Abstract;
 using Business.Concrete;
 using Core.DependencyResolver;
 using Core.Extensions;
-using Core.IoC;
+using Core.Ultilities.IoC;
 using Core.Ultilities.Security.Encryption;
 using Core.Ultilities.Security.JWT;
 using DataAccess.Abstract;
